@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+.small-box {
+  width: 100px;
+  height: 100px;
+  background-color: lightblue;
+  border-radius: 8px;
+}
+
+.middle-box {
+  width: 200px;
+  height: 200px;
+  background-color: lightcoral;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.counter {
+  font-size: 2rem;
+}
+
+.counter-text {
+  font-size: 3rem;
+  font-weight: bold;
+}
