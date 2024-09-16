@@ -1,133 +1,91 @@
 import React from "react";
 import Image from "next/image";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import YouTubeIcon from "@mui/icons-material/YouTube";
-import AccessibilityIcon from "@mui/icons-material/Accessibility";
+import Slide from "./Slide";
+import { FaUserAlt } from "react-icons/fa";
+import { IoCreateOutline, IoReaderOutline } from "react-icons/io5";
+import {
+  MdOutlineTextIncrease,
+  MdOutlineTextDecrease,
+  MdOutlineFormatColorText,
+} from "react-icons/md";
+import { CgDarkMode } from "react-icons/cg";
+import { LiaLanguageSolid } from "react-icons/lia";
 
-const Navbar = () => {
+function Navbar() {
   return (
-    <div>
-      <div className="mx-auto w-full max-w-screen p-4 py-6 px-20 bg-gray-900">
-        <div className="flex gap-10 items-center justify-between">
-          <div className="flex gap-10 items-center">
-            <Image
-              src="/govt.png"
-              alt="Logo"
-              width={200}
-              height={200}
-              className="hidden lg:block"
-            />
-            <Image
-              src="/MOCAI.png"
-              alt="Logo"
-              width={200}
-              height={200}
-              className="hidden lg:block"
-            />
-            <div className="flex mt-4 gap-4 sm:mt-0">
-              <a
-                href="https://www.facebook.com/moayush"
-                className="text-gray-400 hover:text-gray-100"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FacebookIcon className="text-customBlue" />
-              </a>
-              <a
-                href="https://x.com/moayush"
-                className="text-gray-400 hover:text-gray-100"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <TwitterIcon className="text-customBlue" />
-              </a>
-              <a
-                href="https://www.youtube.com/@MinistryofAYUSHofficial/videos"
-                className="text-gray-400 hover:text-gray-100"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <YouTubeIcon className="text-customBlue" />
-              </a>
-              <a
-                href="https://www.instagram.com/ministryofayush/"
-                className="text-gray-400 hover:text-gray-100"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <InstagramIcon className="text-customBlue" />
-              </a>
-            </div>
-          </div>
-          <div>
-            <p className="text-white text-sm">
-              <strong>Our Toll Free Number :</strong> 1800 115 565 (10:00 AM to
-              05:30 PM)
-            </p>
-          </div>
+    <>
+      <div className="bg-main_blue px-4 py-2 flex flex-col md:flex-row justify-between items-center">
+        <div className="mb-2 md:mb-0">
+          <Image
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Logo_Ministry_of_AYUSH.png/798px-Logo_Ministry_of_AYUSH.png?20220214193920"
+            alt="ayush logo"
+            width={250}
+            height={250}
+            className="h-auto"
+          />
+        </div>
+
+        <div className="flex gap-3 md:gap-5 text-text_blue text-xs md:text-sm font-semibold items-center">
+          <p className="hidden md:block">Skip to Main Content</p>
+          <p className="flex items-center">
+            <IoReaderOutline className="mr-1" />
+            Screen Reader
+          </p>
+          <p className="text-md">
+            <MdOutlineTextIncrease />
+          </p>
+          <p className="text-md">
+            <MdOutlineFormatColorText />
+          </p>
+          <p className="text-md">
+            <MdOutlineTextDecrease />
+          </p>
+          <p className="text-md">
+            <CgDarkMode />
+          </p>
+          <p className="text-md">
+            <LiaLanguageSolid />
+          </p>
         </div>
       </div>
 
-      <div className="flex justify-between items-center p-4 bg-slate-600 px-20">
-        <div>
-          <Image src="/logo.jpg" width={200} height={200} alt="logo" />
+      <div className="text-text_blue font-semibold text-xs md:text-sm bg-white flex flex-col md:flex-row justify-between px-5 py-4 md:py-8">
+        <div className="flex justify-center gap-5 md:gap-10 items-center">
+          <p>Home</p>
+          <p>About</p>
+          <p>For Startups</p>
+          <p>For Investors</p>
+          <p>FAQs</p>
         </div>
-        <div className="flex gap-4 items-center">
-          <form className="max-w-md flex flex-grow items-center gap-10 text-white">
-            <div className="relative w-full">
-              <input
-                type="search"
-                className="block w-full p-4 ps-10 text-sm text-white rounded-lg bg-slate-700 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Search"
-              />
-              <button
-                type="submit"
-                className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-customBlue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2"
-              >
-                Search
-              </button>
-            </div>
-          </form>
-          <div>
-            <AccessibilityIcon className="text-3xl text-white" />
-          </div>
-          <a href="#" className="text-sm text-white">
+        <div className="flex justify-center gap-3 md:gap-5 items-center mt-4 md:mt-0">
+          <p className="flex items-center gap-2">
+            <FaUserAlt />
             Login
-          </a>
-          <a href="#" className="text-sm text-white">
+          </p>
+          <p className="flex items-center gap-1">
+            <IoCreateOutline className="text-xl" />
             Register
-          </a>
+          </p>
         </div>
       </div>
 
-      <nav className="w-full  bg-slate-600 text-white border-t-2 border-slate-700">
-        <div className=" mx-20 py-2 flex justify-between items-center">
-          <div className="relative group">
-            <button className="px-4 py-2 hover:bg-slate-700 rounded">
-              Link 1
-            </button>
-          </div>
-          <div className="relative group">
-            <button className="px-4 py-2 hover:bg-slate-700 rounded">
-              Link 2
-            </button>
-          </div>
-          <div className="relative group">
-            <button className="px-4 py-2 hover:bg-slate-700 rounded">
-              Link 3
-            </button>
-          </div>
-          <div className="relative group">
-            <button className="px-4 py-2 hover:bg-slate-700 rounded">
-              Link 4
-            </button>
-          </div>
+      <div className="text-text_blue text-center bg-blue-100">
+        <div className="px-4 md:px-40 py-10">
+          <Slide />
         </div>
-      </nav>
-    </div>
+        <div className="px-4 md:px-0">
+          <p className="font-bold text-xl md:text-2xl mb-2">
+            Empowering Startups, Inspiring Investors - Ayush for Startups!
+          </p>
+          <p className="font-semibold leading-relaxed pb-10">
+            Join a dynamic platform where bold ideas meet strategic
+            <br className="hidden md:block" /> investment, building the future
+            together.
+          </p>
+        </div>
+      </div>
+    </>
   );
-};
+}
 
 export default Navbar;
