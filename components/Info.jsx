@@ -1,73 +1,98 @@
 import React from "react";
+import Counter from "@/components/Counter";
+import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { RiTwitterXFill } from "react-icons/ri";
+import { IoLogoYoutube } from "react-icons/io5";
 
-const InfoSection = () => {
+function Info() {
   return (
-    <div className="p-4 mt-10 mb-10 pr-20 pl-20">
-      <h2 className="text-2xl font-bold mb-6 text-center">Startup Insights</h2>
-      <div className="flex justify-center space-x-4">
-        <div className="w-1/3 bg-blue-500 text-white p-6 rounded-md shadow-lg flex flex-col">
-          <div className="flex-grow flex flex-col justify-between">
-            <div>
-              <h3 className="text-xl font-semibold mb-4 text-center">
-                States Startup Ranking
-              </h3>
-              <p className="text-sm text-center mb-4">
-                The States’ Startup Ranking is an annual capacity building
-                exercise which has been developed with the objective to build a
-                conducive startup ecosystem across the country, through
-                sustained efforts of States and Union Territories.
-              </p>
-            </div>
-            <a
-              href="#"
-              className="bg-white text-blue-500 py-2 px-4 rounded-md font-semibold text-center hover:bg-gray-100"
-            >
-              Know More
-            </a>
-          </div>
+    <>
+      <div className="mx-4 md:mx-20 p-6 md:p-10">
+        <hr />
+        <div>
+          <p className="text-xl md:text-3xl font-semibold my-6 md:my-10">
+            Portal Summary
+          </p>
+          <hr />
         </div>
-        <div className="w-1/3 bg-green-500 text-white p-6 rounded-md shadow-lg flex flex-col">
-          <div className="flex-grow flex flex-col justify-between">
-            <div>
-              <h3 className="text-xl font-semibold mb-4 text-center">
-                Schemes & Policies
+
+        <div className="flex flex-col gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+            <div className="flex flex-col items-center bg-white p-6 rounded-md shadow-lg">
+              <h3 className="text-lg md:text-2xl font-bold mb-2 text-center">
+                Total Startups Registered
               </h3>
-              <p className="text-sm text-center mb-4">
-                An insight into the schemes and policies landscape of the Indian
-                Startup Ecosystem, including steps taken by Startup India to
-                ease the regulatory burden.
-              </p>
+              <Counter />
             </div>
-            <a
-              href="#"
-              className="bg-white text-green-500 py-2 px-4 rounded-md font-semibold text-center hover:bg-gray-100"
-            >
-              Know More
-            </a>
+            <div className="flex flex-col items-center bg-white p-6 rounded-md shadow-lg">
+              <h3 className="text-lg md:text-2xl font-bold mb-2 text-center">
+                Total Investment Opportunities
+              </h3>
+              <Counter />
+            </div>
           </div>
-        </div>
-        <div className="w-1/3 bg-red-500 text-white p-6 rounded-md shadow-lg flex flex-col">
-          <div className="flex-grow flex flex-col justify-between">
-            <div>
-              <h3 className="text-xl font-semibold mb-4 text-center">
-                Additional Info
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+            <div className="flex flex-col items-center bg-white p-6 rounded-md shadow-lg">
+              <h3 className="text-lg md:text-2xl font-bold mb-2 text-center">
+                Total Investor Registered
               </h3>
-              <p className="text-sm text-center mb-4">
-                Additional information and resources related to startup
-                initiatives and their impact.
-              </p>
+              <Counter />
             </div>
-            <a
-              href="#"
-              className="bg-white text-red-500 py-2 px-4 rounded-md font-semibold text-center hover:bg-gray-100"
-            >
-              Know More
-            </a>
+            <div className="flex flex-col items-center bg-white p-6 rounded-md shadow-lg">
+              <h3 className="text-lg md:text-2xl font-bold mb-2 text-center">
+                No. of Startups Responded
+              </h3>
+              <Counter />
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-};
 
-export default InfoSection;
+      <div className="m-4 md:m-10">
+        <p className="bg-bg_blue py-6 md:py-10 rounded-2xl p-6 md:p-10 text-xl md:text-2xl font-bold text-center">
+          Get started on your Startup / Investor journey - the right way!
+        </p>
+        <div className="flex flex-col md:flex-row justify-around mt-6 gap-6">
+          <div className="bg-bg_blue p-6 md:p-10 rounded-2xl text-center">
+            <p className="font-semibold">For Startups</p>
+            <p>
+              Unlock Your Startup Potential with Ayush – Where Ideas Thrive!
+            </p>
+          </div>
+          <div className="bg-bg_blue p-6 md:p-10 rounded-2xl text-center">
+            <p className="font-semibold">For Investors</p>
+            <p>
+              Discover high-potential startups revolutionizing the Ayush
+              industry.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-10 bg-bg_blue">
+        <p className="p-5 text-xl md:text-3xl font-bold text-center">
+          Social Media
+        </p>
+        <div className="flex justify-around items-center text-2xl md:text-4xl text-text_blue p-6 md:p-10">
+          <div className="bg-main_blue p-4 rounded-2xl">
+            <FaFacebook />
+          </div>
+          <div className="bg-main_blue p-4 rounded-2xl">
+            <FaInstagram />
+          </div>
+          <div className="bg-main_blue p-4 rounded-2xl">
+            <RiTwitterXFill />
+          </div>
+          <div className="bg-main_blue p-4 rounded-2xl">
+            <IoLogoYoutube />
+          </div>
+          <div className="bg-main_blue p-4 rounded-2xl">
+            <FaLinkedin />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default Info;

@@ -1,43 +1,78 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import SimpleImageSlider from "react-simple-image-slider";
+import React from "react";
+import Slider from "react-slick";
+import Image from "next/image";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-const images = [
-  { url: "/ayu.png" },
-  { url: "/govt.png" },
-  { url: "/logo.jpg" },
-  { url: "/MOCAI.png" },
-  { url: "/modi.png" },
-];
-
-const Slide = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex === images.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 3000); // Change image every 3 seconds
-
-    return () => clearInterval(interval);
-  }, []);
+const Carousel = () => {
+  const settings = {
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    dots: true,
+    arrows: true,
+    prevArrow: <button className="slick-prev">Prev</button>,
+    nextArrow: <button className="slick-next">Next</button>,
+  };
 
   return (
-    <div style={{ width: "100vw", overflow: "hidden" }}>
-      <SimpleImageSlider
-        width={window.innerWidth}
-        height={504}
-        images={images}
-        showBullets={true}
-        showNavs={true}
-        autoPlay
-        autoPlayInterval={3000} // Interval for auto-play
-        currentIndex={currentIndex}
-        onSlideChange={(index) => setCurrentIndex(index)}
-      />
+    <div className="relative w-full">
+      <Slider {...settings}>
+        <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
+          <Image
+            src="/demo.jpg"
+            alt="Slide 1"
+            layout="fill"
+            objectFit="cover"
+            className="rounded-lg"
+          />
+        </div>
+        <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
+          <Image
+            src="/demo.jpg"
+            alt="Slide 2"
+            layout="fill"
+            objectFit="cover"
+            className="rounded-lg"
+          />
+        </div>
+        <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
+          <Image
+            src="/demo.jpg"
+            alt="Slide 3"
+            layout="fill"
+            objectFit="cover"
+            className="rounded-lg"
+          />
+        </div>
+      </Slider>
+      <style jsx>{`
+        .slick-prev,
+        .slick-next {
+          background: rgba(0, 0, 0, 0.5);
+          border: none;
+          color: white;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+        }
+        .slick-prev {
+          left: 10px;
+        }
+        .slick-next {
+          right: 10px;
+        }
+        .slick-prev:before,
+        .slick-next:before {
+          font-size: 20px;
+          color: white;
+        }
+      `}</style>
     </div>
   );
 };
 
-export default Slide;
+export default Carousel;
