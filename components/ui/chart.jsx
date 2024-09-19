@@ -1,4 +1,5 @@
- "use client";
+"use client";
+
 import * as React from "react"
 import * as RechartsPrimitive from "recharts"
 
@@ -27,35 +28,24 @@ const ChartContainer = React.forwardRef(({ id, className, children, config, ...p
   const chartId = `chart-${id || uniqueId.replace(/:/g, "")}`
 
   return (
-    (<ChartContext.Provider value={{ config }}>
-      <div
-        data-chart={chartId}
-        ref={ref}
-        className={cn(
-          "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-none [&_.recharts-surface]:outline-none",
-          className
-        )}
-        {...props}>
-        <ChartStyle id={chartId} config={config} />
-        <RechartsPrimitive.ResponsiveContainer>
-          {children}
-        </RechartsPrimitive.ResponsiveContainer>
-      </div>
-    </ChartContext.Provider>)
-  );
-})
-ChartContainer.displayName = "Chart"
+    <ChartContext.Provider value={{ id: chartId, config }}>
+    <div ref={ref} id={chartId} className={cn("", className)} {...props}>
+      <ChartStyle id={chartId} config={config} />
+      {children}
+    </div>
+  </ChartContext.Provider>
+);
+});
 
-const ChartStyle = ({
-  id,
-  config
-}) => {
-  const colorConfig = Object.entries(config).filter(([_, config]) => config.theme || config.color)
+ChartContainer.displayName = "Chart";
 
+const ChartStyle = ({ id, config = {} }) => {
+  const colorConfig = Object.entries(config).filter(([_, cfg]) => cfg.theme || cfg.color);
+  
   if (!colorConfig.length) {
-    return null
+    return null;
   }
-
+  
   return (
     (<style
       dangerouslySetInnerHTML={{
@@ -263,41 +253,40 @@ const ChartLegendContent = React.forwardRef((
 ChartLegendContent.displayName = "ChartLegend"
 
 // Helper to extract item config from a payload.
-function getPayloadConfigFromPayload(
-  config,
-  payload,
-  key
-) {
-  if (typeof payload !== "object" || payload === null) {
-    return undefined
+function getPayloadConfigFromPayload(config, payload, key) {
+    // Ensure config is an object
+    if (typeof config !== "object" || config === null) {
+     return undefined;
+    }
+  
+    const payloadPayload =
+      "payload" in payload &&
+      typeof payload.payload === "object" &&
+      payload.payload !== null
+        ? payload.payload
+        : undefined;
+  
+    let configLabelKey = key;
+  
+    if (
+     key in payload &&
+      typeof payload[key] === "string"
+    ) {
+      configLabelKey = payload[key];
+    } else if (
+      payloadPayload &&
+      key in payloadPayload &&
+      typeof payloadPayload[key] === "string"
+    ) {
+      configLabelKey = payloadPayload[key];
+    }
+  
+    // Check if configLabelKey exists in config
+    return config && configLabelKey in config
+      ? config[configLabelKey]
+      : config[key];
   }
-
-  const payloadPayload =
-    "payload" in payload &&
-    typeof payload.payload === "object" &&
-    payload.payload !== null
-      ? payload.payload
-      : undefined
-
-  let configLabelKey = key
-
-  if (
-    key in payload &&
-    typeof payload[key] === "string"
-  ) {
-    configLabelKey = payload[key]
-  } else if (
-    payloadPayload &&
-    key in payloadPayload &&
-    typeof payloadPayload[key] === "string"
-  ) {
-    configLabelKey = payloadPayload[key]
-  }
-
-  return configLabelKey in config
-    ? config[configLabelKey]
-    : config[key];
-}
+  
 
 export {
   ChartContainer,

@@ -2,9 +2,24 @@
 
 import { useRouter } from 'next/navigation';
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CalendarIcon } from "lucide-react";
 import ClientSideBarChart from "./ClientSideBarChart";
+import { TrendingUp } from "lucide-react"
+import { PieChart, Pie, Cell, Label, Tooltip } from "recharts";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart"
 import {
   Sheet,
   SheetContent,
@@ -14,10 +29,24 @@ import {
   SheetTrigger,
   SheetClose,
   SheetFooter,
+  
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 
 import Link from 'next/link';
+
+export const description = "A donut chart with text"
+
+const chartData = [
+  { browser: "Chrome", visitors: 275, color: "#FF69B4" },  
+  { browser: "Safari", visitors: 200, color: "#FFB6C1" },  
+  { browser: "Firefox", visitors: 287, color: "#FFC0CB" }, 
+  { browser: "Edge", visitors: 173, color: "#DB7093" },    
+  { browser: "Other", visitors: 190, color: "#C71585" },   
+];
+
+const totalVisitors = chartData.reduce((acc, curr) => acc + curr.visitors, 0);
+
 
 const data = [
   { name: "Jan", value: 1000 },
@@ -156,6 +185,77 @@ const Dashboard = () => {
           <CardContent className="pl-2">
             <ClientSideBarChart data={data} />
           </CardContent>
+        </Card>
+
+        <Card className="col-span-2">
+
+          <CardHeader className="items-center pb-0">
+            <CardTitle>Pie Chart - Donut with Text</CardTitle>
+            <CardDescription>January - June 2024</CardDescription>
+          </CardHeader>
+
+          <CardContent className="flex-1 pb-0">
+            <ChartContainer className="mx-auto aspect-square max-h-[250px] w-full"
+            >
+              <PieChart width={250} height={250}>
+                <ChartTooltip
+                  cursor={false}
+                  content={<ChartTooltipContent hideLabel />}
+                />
+                <Pie
+                  data={chartData}
+                  dataKey="visitors"
+                  nameKey="browser"
+                  innerRadius={60}
+                  outerRadius={80}
+                  strokeWidth={2}
+                  stroke="#FFFFFF"
+                >
+                  {chartData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                  <Label
+                    content={({ viewBox }) => {
+                      if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                        return (
+                          <text
+                            x={viewBox.cx}
+                            y={viewBox.cy}
+                            textAnchor="middle"
+                            dominantBaseline="middle"
+                          >
+                            <tspan
+                              x={viewBox.cx}
+                              y={viewBox.cy}
+                              className="fill-foreground text-3xl font-bold"
+                            >
+                              {totalVisitors.toLocaleString()}
+                            </tspan>
+                            <tspan
+                              x={viewBox.cx}
+                              y={(viewBox.cy || 0) + 24}
+                              className="fill-muted-foreground"
+                            >
+                              Visitors
+                            </tspan>
+                          </text>
+                        )
+                      }
+                      return null;
+                    }}
+                  />
+                </Pie>
+              </PieChart>
+            </ChartContainer>
+          </CardContent>
+          <CardFooter className="flex-col gap-2 text-sm">
+            <div className="flex items-center gap-2 font-medium leading-none">
+              Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+            </div>
+            <div className="leading-none text-muted-foreground">
+              Showing total visitors for the last 6 months
+            </div>
+          </CardFooter>
         </Card>
 
         <Card className="col-span-3">
